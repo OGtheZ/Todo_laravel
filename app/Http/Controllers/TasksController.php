@@ -19,7 +19,11 @@ class TasksController extends Controller
 
     public function create()
     {
-        Task::create(\request()->all());
+        $attributes = \request()->validate([
+            'title' => ['required'],
+            'description' => ['required'],
+        ]);
+        Task::create($attributes);
         return redirect('/tasks')->with('success', 'Task created successfully!');
     }
 
