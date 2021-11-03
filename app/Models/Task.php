@@ -12,7 +12,6 @@ class Task extends Model
     protected $fillable = [
         'title',
         'description',
-        'user_id'
     ];
 
     protected $guarded = [
@@ -20,7 +19,7 @@ class Task extends Model
     ];
 
     protected $attributes = [
-        'status' => 'created'
+
     ];
 
     public function user()

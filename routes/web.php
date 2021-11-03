@@ -27,6 +27,6 @@ Route::post('/tasks/create', [\App\Http\Controllers\TasksController::class, 'cre
 Route::get('/tasks/{id}/edit', [\App\Http\Controllers\TasksController::class, 'showEditForm'])->middleware('auth')->name('tasks.edit');
 Route::post('/tasks/{id}/edit', [\App\Http\Controllers\TasksController::class, 'edit'])->middleware('auth');
 Route::post('/tasks/{id}/delete', [\App\Http\Controllers\TasksController::class, 'delete'])->middleware('auth');
-Route::post('/tasks/{id}/markDone', [\App\Http\Controllers\TasksController::class, 'markAsCompleted'])->middleware('auth');
+Route::put('/tasks/{id}/markDone', [\App\Http\Controllers\TasksController::class, 'toggleCompleted'])->middleware('auth');
 
 

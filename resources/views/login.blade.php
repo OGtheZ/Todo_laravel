@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
-
-<form style="margin-left: 5px" action="/" method="post">
+    <div class="w3-container">
+<form style="margin-left: 5px; display: inline-block" action="/" method="post">
 
     @csrf
 
@@ -18,14 +18,15 @@
     @enderror
 
     <label for="email">E-mail</label>
-    <input type="text" id="email" name="email">
-    <br><br>
+    <input style="margin-top: 5px" type="text" id="email" name="email">
+    <br>
     <label for="password">Password</label>
-    <input type="password" id="password" name="password">
+    <input style="margin-top: 5px" type="password" id="password" name="password">
     <br><br>
     <input type="submit" value="Login">
 
 </form>
+        </div>
 <br>
 <a style="margin-left: 5px" href="/register">Register account</a>
 @endsection

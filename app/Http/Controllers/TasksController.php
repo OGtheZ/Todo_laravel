@@ -23,11 +23,13 @@ class TasksController extends Controller
             'title' => ['required', 'max:255', 'min:1'],
             'description' => ['required', 'max:255'],
         ]);
-        Task::create([
+        $task = new Task([
             'title' => $attributes['title'],
             'description' => $attributes['description'],
-            'user_id' => auth()->user()->id,
         ]);
+            $task->user()->associate(auth()->user());
+            $task->save();
+
         return redirect('/tasks')->with('success', 'Task created successfully!');
     }
 
@@ -53,10 +55,10 @@ class TasksController extends Controller
         return redirect('/tasks')->with('success', "Task deleted!");
     }
 
-    public function markAsCompleted($id)
+    public function toggleCompleted($id)
     {
         $task = Task::find($id);
-        $task->status = 'completed';
+        $task->completed_at = $task->completed_at ? null : now();
         $task->save();
         return redirect('/tasks');
     }
