@@ -13,6 +13,9 @@
     @error('password')
     <p style="color: red" style="font-size: x-small">{{ $message }}</p>
     @enderror
+    @error('email')
+    <p style="color: red" style="font-size: x-small">{{ $message }}</p>
+    @enderror
 
     <label for="email">E-mail</label>
     <input type="text" id="email" name="email">

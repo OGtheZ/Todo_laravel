@@ -11,10 +11,20 @@ class Task extends Model
 
     protected $fillable = [
         'title',
-        'description'
+        'description',
+        'user_id'
+    ];
+
+    protected $guarded = [
+
     ];
 
     protected $attributes = [
         'status' => 'created'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
