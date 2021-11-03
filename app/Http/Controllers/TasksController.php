@@ -20,8 +20,8 @@ class TasksController extends Controller
     public function create()
     {
         $attributes = \request()->validate([
-            'title' => ['required'],
-            'description' => ['required'],
+            'title' => ['required', 'max:255', 'min:1'],
+            'description' => ['required', 'max:255'],
         ]);
         Task::create([
             'title' => $attributes['title'],
