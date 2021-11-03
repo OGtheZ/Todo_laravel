@@ -19,6 +19,10 @@ class AuthUserController extends Controller
             'email' => ['required', 'exists:users,email'],
             'password' => ['required']
         ]);
+        if($attributes == false)
+        {
+            return back()->withErrors(['email' => "Email not found!"]);
+        }
 
         if(auth()->attempt($attributes)) {
             session()->regenerate();

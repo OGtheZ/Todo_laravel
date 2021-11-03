@@ -9,7 +9,7 @@ class TasksController extends Controller
 {
     public function index()
     {
-        return view('showTasks', ['tasks' => Task::all()->sortByDesc('created_at')]);
+        return view('showTasks', ['tasks' => Task::all()->where('user_id', auth()->user()->id)->sortByDesc('created_at')]);
     }
 
     public function showCreateForm()
@@ -20,10 +20,14 @@ class TasksController extends Controller
     public function create()
     {
         $attributes = \request()->validate([
-            'title' => ['required'],
-            'description' => ['required'],
+            'title' => ['required', 'max:255', 'min:1'],
+            'description' => ['required', 'max:255'],
         ]);
-        Task::create($attributes);
+        Task::create([
+            'title' => $attributes['title'],
+            'description' => $attributes['description'],
+            'user_id' => auth()->user()->id,
+        ]);
         return redirect('/tasks')->with('success', 'Task created successfully!');
     }
 

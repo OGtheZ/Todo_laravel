@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
-<form action="/" method="post">
+<form style="margin-left: 5px" action="/" method="post">
 
     @csrf
 
@@ -11,6 +11,9 @@
         </p>
     @endif
     @error('password')
+    <p style="color: red" style="font-size: x-small">{{ $message }}</p>
+    @enderror
+    @error('email')
     <p style="color: red" style="font-size: x-small">{{ $message }}</p>
     @enderror
 
@@ -24,5 +27,5 @@
 
 </form>
 <br>
-<a href="/register">Register account</a>
+<a style="margin-left: 5px" href="/register">Register account</a>
 @endsection
