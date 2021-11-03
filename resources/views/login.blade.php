@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
-<form action="/" method="post">
+<form style="margin-left: 5px" action="/" method="post">
 
     @csrf
 
@@ -27,5 +27,5 @@
 
 </form>
 <br>
-<a href="/register">Register account</a>
+<a style="margin-left: 5px" href="/register">Register account</a>
 @endsection

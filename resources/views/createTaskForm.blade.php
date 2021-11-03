@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
-<a href="/tasks">Back</a>
-<form action="/tasks/create" method="post">
+<a style="margin-left: 5px" href="/tasks">Back</a>
+<form style="margin-left: 5px" action="/tasks/create" method="post">
     @csrf
 
     <label for="title">Title</label>

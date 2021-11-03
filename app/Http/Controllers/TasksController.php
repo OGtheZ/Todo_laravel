@@ -9,7 +9,7 @@ class TasksController extends Controller
 {
     public function index()
     {
-        return view('showTasks', ['tasks' => Task::all()->where('user_id', auth()->user()->id)]);
+        return view('showTasks', ['tasks' => Task::all()->where('user_id', auth()->user()->id)->sortByDesc('created_at')]);
     }
 
     public function showCreateForm()
