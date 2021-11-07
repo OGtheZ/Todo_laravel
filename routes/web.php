@@ -21,12 +21,12 @@ Route::post('/logout', [\App\Http\Controllers\AuthUserController::class, 'logout
 Route::get('/register', [RegisterUserController::class, 'showForm'])->middleware('guest');
 Route::post('/register', [RegisterUserController::class, 'store'])->middleware('guest');
 
-Route::get('/tasks', [\App\Http\Controllers\TasksController::class, 'index'])->middleware('auth');
+Route::get('/tasks', [\App\Http\Controllers\TasksController::class, 'index'])->middleware('auth')->name('tasks.index');
 Route::get('/tasks/create', [\App\Http\Controllers\TasksController::class, 'showCreateForm'])->middleware('auth');
 Route::post('/tasks/create', [\App\Http\Controllers\TasksController::class, 'create'])->middleware('auth');
 Route::get('/tasks/{id}/edit', [\App\Http\Controllers\TasksController::class, 'showEditForm'])->middleware('auth')->name('tasks.edit');
 Route::post('/tasks/{id}/edit', [\App\Http\Controllers\TasksController::class, 'edit'])->middleware('auth');
 Route::post('/tasks/{id}/delete', [\App\Http\Controllers\TasksController::class, 'delete'])->middleware('auth');
-Route::post('/tasks/{id}/markDone', [\App\Http\Controllers\TasksController::class, 'markAsCompleted'])->middleware('auth');
+Route::put('/tasks/{id}/markDone', [\App\Http\Controllers\TasksController::class, 'toggleCompleted'])->middleware('auth');
 
 
