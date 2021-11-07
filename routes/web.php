@@ -26,7 +26,12 @@ Route::get('/tasks/create', [\App\Http\Controllers\TasksController::class, 'show
 Route::post('/tasks/create', [\App\Http\Controllers\TasksController::class, 'create'])->middleware('auth');
 Route::get('/tasks/{id}/edit', [\App\Http\Controllers\TasksController::class, 'showEditForm'])->middleware('auth')->name('tasks.edit');
 Route::post('/tasks/{id}/edit', [\App\Http\Controllers\TasksController::class, 'edit'])->middleware('auth');
-Route::post('/tasks/{id}/delete', [\App\Http\Controllers\TasksController::class, 'delete'])->middleware('auth');
+
 Route::put('/tasks/{id}/markDone', [\App\Http\Controllers\TasksController::class, 'toggleCompleted'])->middleware('auth');
+Route::post('/tasks/{id}/delete', [\App\Http\Controllers\TasksController::class, 'delete'])->middleware('auth');
+Route::post('/tasks/{id}/restore', [\App\Http\Controllers\TasksController::class, 'restore'])->middleware('auth');
+Route::get('/tasks/deleted', [\App\Http\Controllers\TasksController::class, 'showDeletedTasks'])->middleware('auth');
+Route::post('/tasks/{id}/deletePerm', [\App\Http\Controllers\TasksController::class, 'deletePermanently'])->middleware('auth');
+Route::post('/tasks/clearDeleted', [\App\Http\Controllers\TasksController::class, 'clearDeleted'])->middleware('auth');
 
 

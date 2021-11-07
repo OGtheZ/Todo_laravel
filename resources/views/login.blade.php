@@ -1,32 +1,37 @@
 @extends('layout')
 @section('content')
-    <div class="w3-container">
-<form style="margin-left: 5px; display: inline-block" action="/" method="post">
+    <div>
+        <form style="margin-left: 5px; display: inline-block" action="/" method="post">
+            @csrf
 
-    @csrf
+            <img src="{{ asset('images/welcome.jpg') }}" alt="Loading...">
+            <br>
+            @if (session()->has('success'))
+                <p style="margin-left: 5px">
+                    {{ session('success') }}
+                </p>
+            @endif
+            @error('password')
+            <p style="color: red" style="font-size: x-small">{{ $message }}</p>
+            @enderror
+            @error('email')
+            <p style="color: red" style="font-size: x-small">{{ $message }}</p>
+            @enderror
 
-    @if (session()->has('success'))
-        <p>
-            {{ session('success') }}
-        </p>
-    @endif
-    @error('password')
-    <p style="color: red" style="font-size: x-small">{{ $message }}</p>
-    @enderror
-    @error('email')
-    <p style="color: red" style="font-size: x-small">{{ $message }}</p>
-    @enderror
+            <label style="margin-right: 24px" for="email">E-mail</label>
+            <input style="margin-top: 5px" type="text" id="email" name="email">
+            <br>
+            <label for="password">Password</label>
+            <input style="margin-top: 5px" type="password" id="password" name="password">
+            <br><br>
+            <button style="background-color: chartreuse" type="submit">Login</button>
 
-    <label for="email">E-mail</label>
-    <input style="margin-top: 5px" type="text" id="email" name="email">
-    <br>
-    <label for="password">Password</label>
-    <input style="margin-top: 5px" type="password" id="password" name="password">
-    <br><br>
-    <input type="submit" value="Login">
-
-</form>
-        </div>
-<br>
-<a style="margin-left: 5px" href="/register">Register account</a>
+        </form>
+        <br>
+        <br>
+        <form style="display: inline-block" action="/register" method="get">
+            @csrf
+            <button type="submit">Register</button>
+        </form>
+    </div>
 @endsection

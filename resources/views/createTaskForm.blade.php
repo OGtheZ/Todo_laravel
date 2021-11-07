@@ -1,6 +1,9 @@
 @extends('layout')
 @section('content')
-<a style="margin-left: 5px" href="/tasks">Back</a>
+    <form style="margin-left: 5px; margin-top: 5px" action="/tasks" method="get">
+        @csrf
+        <button type="submit">Back</button>
+    </form>
 <form style="margin-left: 5px" action="/tasks/create" method="post">
     @csrf
 

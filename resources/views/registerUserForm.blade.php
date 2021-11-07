@@ -22,9 +22,12 @@
     <p style="color: red" style="font-size: x-small">{{ $message }}</p>
     @enderror
     <br>
-    <input type="submit" value="Register">
+    <button type="submit">Register</button>
 
 </form>
 
-<a href="/">Back</a>
+<form action="/" method="get">
+    @csrf
+    <button type="submit">Back</button>
+</form>
 @endsection

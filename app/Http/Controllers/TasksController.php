@@ -9,7 +9,8 @@ class TasksController extends Controller
 {
     public function index()
     {
-        return view('showTasks', ['tasks' => Task::all()->where('user_id', auth()->user()->id)->sortByDesc('created_at')]);
+        return view('showTasks', ['tasks' => Task::all()->where('user_id', auth()->user()->id)->sortByDesc('created_at'),
+            'deletedTasks' => Task::onlyTrashed()->get()->count()]);
     }
 
     public function showCreateForm()
@@ -61,5 +62,34 @@ class TasksController extends Controller
         $task->completed_at = $task->completed_at ? null : now();
         $task->save();
         return redirect('/tasks');
+    }
+
+    public function showDeletedTasks()
+    {
+        return view('deletedTasks', ['tasks' => Task::onlyTrashed()->where('user_id', auth()->user()->id)->get()]);
+    }
+
+    public function deletePermanently($id)
+    {
+        $task = Task::withTrashed()->where('id', $id)->get();
+        $task[0]->forceDelete();
+        return redirect('/tasks/deleted');
+    }
+
+    public function restore($id)
+    {
+        $task = Task::withTrashed()->where('id', $id)->get();
+        $task[0]->restore();
+        return redirect('/tasks/deleted')->with('success', 'Restored successfully!');
+    }
+
+    public function clearDeleted()
+    {
+        $tasks = Task::onlyTrashed()->get();
+        foreach ($tasks as $task)
+        {
+            $task->forceDelete();
+        }
+        return redirect('/tasks')->with('success', 'Deleted tasks cleared!');
     }
 }

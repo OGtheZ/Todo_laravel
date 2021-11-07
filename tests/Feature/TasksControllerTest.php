@@ -41,5 +41,8 @@ class TasksControllerTest extends TestCase
 
         $response = $this->get("/tasks/$task->id/edit");
         $response->assertStatus(200);
+        $response->assertViewIs('editTaskForm');
     }
+
+
 }
