@@ -15,6 +15,6 @@
     <br>
     <textarea style="resize: none;" name="description" id="description" cols="30" rows="10"></textarea>
     <br>
-    <input type="submit" value="Create task">
+    <button type="submit">Create task</button>
 </form>
 @endsection

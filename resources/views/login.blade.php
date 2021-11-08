@@ -1,13 +1,12 @@
 @extends('layout')
 @section('content')
+    <img src="{{ asset('images/welcome.jpg') }}" alt="Loading...">
     <div>
         <form style="margin-left: 5px; display: inline-block" action="/" method="post">
             @csrf
-
-            <img src="{{ asset('images/welcome.jpg') }}" alt="Loading...">
             <br>
             @if (session()->has('success'))
-                <p style="margin-left: 5px">
+                <p style="margin-left: 5px; background-color: #0096FF; width: 200px; border-radius: 8px; text-align: center">
                     {{ session('success') }}
                 </p>
             @endif

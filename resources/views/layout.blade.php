@@ -10,7 +10,7 @@
     <style>
         div {
             position: fixed;
-            top: 20%;
+            top: 50%;
             left: 50%;
             margin-top: -100px;
             margin-left: -200px;
@@ -30,19 +30,30 @@
         }
         button {
             border-radius: 8px;
+            background-color: #0096FF;
+        }
+        button.delete {
+            background-color: #FF7F7F;
+        }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
         }
     </style>
 </head>
 <body>
 @auth()
     <h3 style="margin-left: 5px; display: inline-block">Welcome <strong>{{ auth()->user()->name }}</strong> !</h3>
-    <form style="margin-right: 5px;margin-top: 5px ; display: inline-block; float: right " action="/logout" method="post">
+    <form style="margin-right: 5px;margin-top: 5px ; display: inline-block;" action="/logout" method="post">
         @csrf
-        <button style="background-color: firebrick; color: black " type="submit" onclick="confirm('Logout?')">Logout</button>
+        <button style="background-color: #DC143C; color: black " type="submit" onclick="confirm('Logout?')">Logout</button>
     </form>
 @endauth
 <br>
 @yield('content')
+
 
 </body>
 </html>

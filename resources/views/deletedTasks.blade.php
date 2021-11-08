@@ -2,7 +2,7 @@
 @section('content')
 
     @if (session()->has('success'))
-        <p style="margin-left: 5px">
+        <p style="margin-left: 5px; background-color: #0096FF; width: 200px; border-radius: 8px; text-align: center">
             {{ session('success') }}
         </p>
     @endif
@@ -12,7 +12,7 @@
     </form>
     <form style="display: inline-block" action="/tasks/clearDeleted" method="post">
         @csrf
-        <button  type="submit" onclick="return confirm('Are you sure?')">Clear deleted</button>
+        <button class="delete" type="submit" onclick="return confirm('Are you sure?')">Clear deleted</button>
     </form>
     <h3>Deleted tasks:</h3>
     @if(count($tasks) === 0)
@@ -38,7 +38,7 @@
                     <td>
                         <form style="display: inline-block" action="/tasks/{{$task->id}}/deletePerm" method="post">
                             @csrf
-                            <button type="submit" onclick="return confirm('Delete {{$task->title}}?')">Remove</button>
+                            <button class="delete" type="submit" onclick="return confirm('Delete {{$task->title}}?')">Remove</button>
                         </form>
                         &nbsp;
                         <form style="display: inline-block" action="/tasks/{{$task->id}}/restore" method="post">
@@ -49,5 +49,7 @@
                 </tr>
 
     @endforeach
+        {{ $tasks->links() }}
     @endif
+
 @endsection

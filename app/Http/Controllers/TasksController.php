@@ -9,8 +9,9 @@ class TasksController extends Controller
 {
     public function index()
     {
-        return view('showTasks', ['tasks' => Task::all()->where('user_id', auth()->user()->id)->sortByDesc('created_at'),
-            'deletedTasks' => Task::onlyTrashed()->get()->count()]);
+        $tasks = Task::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
+        return view('showTasks', ['tasks' => $tasks,
+            'deletedTasks' => Task::onlyTrashed()->where('user_id', auth()->user()->id)->get()->count()]);
     }
 
     public function showCreateForm()
@@ -22,7 +23,7 @@ class TasksController extends Controller
     {
         $attributes = \request()->validate([
             'title' => ['required', 'max:255', 'min:1'],
-            'description' => ['required', 'max:255'],
+            'description' => ['required', 'max:255', 'min:1'],
         ]);
         $task = new Task([
             'title' => $attributes['title'],
@@ -41,7 +42,10 @@ class TasksController extends Controller
 
     public function edit($id)
     {
-        $attributes = \request()->all();
+        $attributes = \request()->validate([
+            'title' => ['required', 'max:255', 'min:1'],
+            'description' => ['required', 'max:255', 'min:1'],
+        ]);;
         $task = Task::find($id);
         $task->title = $attributes['title'];
         $task->description = $attributes['description'];
@@ -61,12 +65,12 @@ class TasksController extends Controller
         $task = Task::find($id);
         $task->completed_at = $task->completed_at ? null : now();
         $task->save();
-        return redirect('/tasks');
+        return redirect()->back();
     }
 
     public function showDeletedTasks()
     {
-        return view('deletedTasks', ['tasks' => Task::onlyTrashed()->where('user_id', auth()->user()->id)->get()]);
+        return view('deletedTasks', ['tasks' => Task::onlyTrashed()->where('user_id', auth()->user()->id)->paginate(10)]);
     }
 
     public function deletePermanently($id)
