@@ -16,13 +16,18 @@
     </form>
     <form style="display: inline-block" action="/tasks/clearDeleted" method="post">
         @csrf
-        <button class="delete" type="submit" onclick="return confirm('Are you sure?')">Clear deleted</button>
+        <button class="delete" type="submit" onclick="return confirm('Clear all deleted tasks?')">Clear deleted</button>
+    </form>
+    <form style="display: inline-block" action="/tasks/deleteCompleted" method="post">
+        @csrf
+        <button class="delete" type="submit" onclick="return confirm('Delete completed tasks?')">Delete completed</button>
     </form>
     <h3 style="margin-left: 5px">Your tasks:</h3>
     @if(count($tasks) === 0)
         <h4 style="margin-left: 5px">No new tasks!</h4>
     @else
          {{ $tasks->links() }}
+
     <table>
         <tr>
             <th>Task title</th>

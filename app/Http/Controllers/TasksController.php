@@ -96,4 +96,16 @@ class TasksController extends Controller
         }
         return redirect('/tasks')->with('success', 'Deleted tasks cleared!');
     }
+
+    public function deleteCompleted()
+    {
+        $tasks = Task::all()->where('user_id', auth()->user()->id)
+            ->where('completed_at', !null);
+        foreach ($tasks as $task)
+        {
+            $task->delete();
+        }
+
+        return redirect('/tasks');
+    }
 }

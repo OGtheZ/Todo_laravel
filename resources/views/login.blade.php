@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-    <img src="{{ asset('images/welcome.jpg') }}" alt="Loading...">
+    <img src="{{ asset('images/welcome.jpg') }}" alt="Loading..." style="width: 400px">
     <div>
         <form style="margin-left: 5px; display: inline-block" action="/" method="post">
             @csrf

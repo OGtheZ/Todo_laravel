@@ -45,7 +45,7 @@
 </head>
 <body>
 @auth()
-    <h3 style="margin-left: 5px; display: inline-block">Welcome <strong>{{ auth()->user()->name }}</strong> !</h3>
+    <h3 style="margin-left: 5px; display: inline-block">Welcome, <strong>{{ auth()->user()->name }}</strong> !</h3>
     <form style="margin-right: 5px;margin-top: 5px ; display: inline-block;" action="/logout" method="post">
         @csrf
         <button style="background-color: #DC143C; color: black " type="submit" onclick="confirm('Logout?')">Logout</button>

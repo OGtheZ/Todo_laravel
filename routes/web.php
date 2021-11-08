@@ -33,5 +33,6 @@ Route::post('/tasks/{id}/restore', [\App\Http\Controllers\TasksController::class
 Route::get('/tasks/deleted', [\App\Http\Controllers\TasksController::class, 'showDeletedTasks'])->middleware('auth');
 Route::post('/tasks/{id}/deletePerm', [\App\Http\Controllers\TasksController::class, 'deletePermanently'])->middleware('auth');
 Route::post('/tasks/clearDeleted', [\App\Http\Controllers\TasksController::class, 'clearDeleted'])->middleware('auth');
+Route::post('/tasks/deleteCompleted', [\App\Http\Controllers\TasksController::class, 'deleteCompleted'])->middleware('auth');
 
 
