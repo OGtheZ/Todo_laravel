@@ -70,12 +70,15 @@ class TasksController extends Controller
 
     public function showDeletedTasks()
     {
-        return view('deletedTasks', ['tasks' => Task::onlyTrashed()->where('user_id', auth()->user()->id)->paginate(10)]);
+        return view('deletedTasks', ['tasks' => Task::onlyTrashed()
+            ->where('user_id', auth()->user()->id)
+            ->orderBy('deleted_at', 'desc')
+            ->paginate(10)]);
     }
 
     public function deletePermanently($id)
     {
-        $task = Task::withTrashed()->where('id', $id)->get();
+        $task = Task::withTrashed()->where('id', $id)->where('user_id', auth()->user()->id)->get();
         $task[0]->forceDelete();
         return redirect('/tasks/deleted');
     }
