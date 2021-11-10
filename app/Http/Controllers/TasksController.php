@@ -25,6 +25,10 @@ class TasksController extends Controller
             'title' => ['required', 'max:255', 'min:1'],
             'description' => ['required', 'max:255', 'min:1'],
         ]);
+        if($attributes['description'] == false)
+        {
+            return back()->withErrors(['desc' => "Description is required!"]);
+        }
         $task = new Task([
             'title' => $attributes['title'],
             'description' => $attributes['description'],
@@ -45,7 +49,8 @@ class TasksController extends Controller
         $attributes = \request()->validate([
             'title' => ['required', 'max:255', 'min:1'],
             'description' => ['required', 'max:255', 'min:1'],
-        ]);;
+        ]);
+
         $task = Task::find($id);
         $task->title = $attributes['title'];
         $task->description = $attributes['description'];
